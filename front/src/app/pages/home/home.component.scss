@@ -4,4 +4,10 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  .cta-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 250px;
+  }
 }
