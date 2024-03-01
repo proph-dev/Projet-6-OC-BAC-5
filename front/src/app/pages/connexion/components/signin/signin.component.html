@@ -1,0 +1,20 @@
+<div class="page-content">
+    <a href="/" class="back-arrow">
+        <img src="../../../../assets/left-arrow.png" alt="Retour sur la page principale">
+    </a>
+
+    <div class="form-content">
+        <h1>Se connecter</h1>
+
+        <form [formGroup]="form" (ngSubmit)="submit()">
+            <label for="userinfo">E-mail ou nom d'utilisateur</label>
+            <input type="text" id="userinfo" formControlName="userinfo" class="userinfo" required>
+
+            <label for="password">Mot de passe</label>
+            <input type="password" id="password" formControlName="password" class="password" required>
+
+            <button type="submit" [disabled]="form.invalid">Se connecter</button>
+            <span *ngIf="onError" class="error">Il y a une erreur dans les champs que vous avez saisis, veuillez recommencer.</span>
+        </form>
+    </div>
+</div>
