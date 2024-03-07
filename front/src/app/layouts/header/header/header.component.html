@@ -1,0 +1,13 @@
+<nav>
+    <img src="/assets/logo.png" alt="logo" />
+
+    <div class="tabs" *ngIf="shouldDisplayBtn()">
+        <button (click)="routerHome()">Articles</button>
+        <button (click)="routerTheme()">Themes</button>
+        <button id="img-btn" (click)="routerProfil()">
+            <img src="/assets/icon-user.svg" alt="Compte user" class="user-icon">
+        </button>
+    </div>
+
+    <app-sidebar *ngIf="isSidebarVisible"></app-sidebar>
+</nav>

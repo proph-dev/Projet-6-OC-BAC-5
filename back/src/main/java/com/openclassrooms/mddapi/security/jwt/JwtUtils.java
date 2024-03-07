@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.security.jwt;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import org.slf4j.Logger;
@@ -25,16 +26,21 @@ public class JwtUtils {
   public String generateJwtToken(Authentication authentication) {
 
     UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+    long currentTimeMillis = System.currentTimeMillis();
+    Date now = new Date(currentTimeMillis);
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTime(now);
+    calendar.add(Calendar.DATE, 1);
 
     return Jwts.builder()
-        .setSubject((userPrincipal.getUsername()))
-        .setIssuedAt(new Date())
-        .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+        .setSubject(userPrincipal.getEmail())
+        .setIssuedAt(new Date(currentTimeMillis))
+        .setExpiration(calendar.getTime())
         .signWith(SignatureAlgorithm.HS512, jwtSecret)
         .compact();
   }
 
-  public String getUserNameFromJwtToken(String token) {
+  public String getUserMailFromJwtToken(String token) {
     return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
   }
 

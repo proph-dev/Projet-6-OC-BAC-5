@@ -1,0 +1,51 @@
+nav {
+    height: 7rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    border-bottom: 1px solid #000;
+    margin-bottom: 2rem;
+
+    img:not(.user-icon) {
+        height: 90%;
+    }
+    
+    div {
+        height: 80%;
+        display: flex;
+        align-items: center;
+    }
+    
+    button {
+        background: none;
+        border: none;
+        font-size: 20px;
+        margin-right: 2rem;
+        border-radius: 5px;
+        padding-inline: 1rem;
+        height: 3rem;
+        &:hover {
+            background: rgb(236, 229, 250);
+            cursor: pointer;
+        }
+        img {
+           background: #D9D9D9;
+           padding: 1rem;
+           border-radius: 50%;
+        }
+    }
+    
+    #img-btn {
+        height: 5rem;
+        &:hover {
+            background: none;
+        }
+    }
+}
+
+@media only screen and (max-width : 768px) and (orientation: portrait) {
+    div {
+        display: none !important;
+    }
+}

@@ -1,5 +1,7 @@
 package com.openclassrooms.mddapi.controllers;
 
+import java.time.LocalDateTime;
+
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
@@ -32,7 +34,7 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
-    AuthController(AuthenticationManager authenticationManager,
+    public AuthController(AuthenticationManager authenticationManager,
             PasswordEncoder passwordEncoder,
             JwtUtils jwtUtils,
             UserRepository userRepository) {
@@ -52,8 +54,6 @@ public class AuthController {
         String jwt = jwtUtils.generateJwtToken(authentication);
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-        User user = this.userRepository.findByEmail(userDetails.getEmail()).orElse(null);
-
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
                 userDetails.getEmail(),
@@ -68,10 +68,12 @@ public class AuthController {
                     .body(new MessageResponse("Error: Email is already taken!"));
         }
 
+        LocalDateTime now = LocalDateTime.now();
         // Create new user's account
         User user = new User(signUpRequest.getEmail(),
-                signUpRequest.getUserName(),
+                signUpRequest.getUsername(),
                 passwordEncoder.encode(signUpRequest.getPassword()));
+        user.setCreatedAt(now);
 
         userRepository.save(user);
 

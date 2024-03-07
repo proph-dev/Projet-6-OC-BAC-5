@@ -1,0 +1,78 @@
+.burger-menu-button {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    
+    img {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+.navbar-menu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 60%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+
+    &.active {
+        transform: translateX(0);
+    }
+
+    button {
+        background: none;
+        border: none;
+        padding: 10px 20px;
+        text-align: right;
+        font-size: 20px;
+        color: #333;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+
+    #img-btn {
+        align-self: flex-end;
+        margin-top: auto;
+        background-color: #ccc;
+        border-radius: 100%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        margin-right: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+.navbar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(204, 204, 204, 0.5);
+    display: none;
+    z-index: 99;
+}
+
+.navbar-menu.active + .navbar-overlay {
+    display: block;
+}
+
+@media only screen and (max-width: 768px) and (orientation: portrait) {
+    .burger-menu-button {
+        display: block;
+    }
+}

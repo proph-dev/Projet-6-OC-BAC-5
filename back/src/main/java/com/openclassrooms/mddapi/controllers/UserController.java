@@ -1,15 +1,18 @@
 package com.openclassrooms.mddapi.controllers;
 
+import com.openclassrooms.mddapi.dto.UserDto;
 import com.openclassrooms.mddapi.mapper.UserMapper;
 import com.openclassrooms.mddapi.models.User;
+import com.openclassrooms.mddapi.security.services.UserDetailsImpl;
 import com.openclassrooms.mddapi.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
+
+import javax.servlet.http.HttpServletRequest;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -18,17 +21,17 @@ public class UserController {
     private final UserMapper userMapper;
     private final UserService userService;
 
-
     public UserController(UserService userService,
-                             UserMapper userMapper) {
+            UserMapper userMapper) {
         this.userMapper = userMapper;
         this.userService = userService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> findById(@PathVariable("id") String id) {
+    @GetMapping("/me")
+    public ResponseEntity<?> findById(HttpServletRequest request) {
         try {
-            User user = this.userService.findById(Long.valueOf(id));
+            Long userId = userService.getUserIdFromAuth(request);
+            User user = this.userService.findById(Long.valueOf(userId));
 
             if (user == null) {
                 return ResponseEntity.notFound().build();
@@ -40,7 +43,7 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<?> save(@PathVariable("id") String id) {
         try {
             User user = this.userService.findById(Long.valueOf(id));
@@ -49,9 +52,10 @@ public class UserController {
                 return ResponseEntity.notFound().build();
             }
 
-            UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication()
+                    .getPrincipal();
 
-            if(!Objects.equals(userDetails.getUsername(), user.getEmail())) {
+            if (!Objects.equals(userDetails.getEmail(), user.getEmail())) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
 
@@ -61,4 +65,19 @@ public class UserController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<?> updateUser(@RequestBody UserDto userDto, HttpServletRequest request) {
+        try {
+            Long userId = userService.getUserIdFromAuth(request);
+            User updatedUser = userService.updateUser(userId, userDto);
+            if (updatedUser == null) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok().body(userMapper.toDto(updatedUser));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
 }

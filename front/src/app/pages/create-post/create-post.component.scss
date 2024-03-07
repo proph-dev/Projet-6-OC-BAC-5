@@ -1,0 +1,138 @@
+.page-content {
+  text-align: center;
+  width: 100%;
+  height: calc(100vh - (7rem));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  .top-infos {
+    position: relative;
+    display: flex;
+
+    .back-arrow {
+      position: absolute;
+      left: -75px;
+
+      img {
+        rotate: 90deg;
+        width: 40px;
+      }
+    }
+  
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+  }
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    margin-top: 3rem;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    height: auto;
+  }
+  
+  label {
+    display: none;
+  }
+  
+  input {
+    width: 90%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #7763C5;
+    border-radius: 5px;
+    height: 2rem !important;
+    background: none;
+  }
+  
+  select {
+    width: 95%;
+    margin-top: 5px;
+    border: 1px solid #7763C5;
+    border-radius: 5px;
+    height: 3rem;
+    background: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  textarea {
+    width: 90%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #7763C5;
+    border-radius: 5px;
+    height: 6rem;
+  }
+  
+  button[type="submit"] {
+    background-color: #5d4aac;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s, cursor 0.3s;
+    margin-top: 10px;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #4b1471;
+  }
+  
+  div.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2rem;
+    width: 100%;
+  }
+  
+  button.back-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px; 
+    margin-left: 0; 
+    align-self: flex-start;
+    height: auto; 
+  }
+}
+
+@media only screen and (max-width: 768px) and (orientation: portrait) {
+  form {
+    width: 90%;
+  }
+
+  input,
+  select,
+  textarea {
+    padding: 5px !important;
+    height: 2rem !important;
+    width: 60% !important;
+  }
+
+  select {
+    width: 63% !important;
+  }
+
+  textarea {
+    height: 6rem;
+  }
+
+  button[type="submit"] {
+    font-size: 16px;
+  }
+}

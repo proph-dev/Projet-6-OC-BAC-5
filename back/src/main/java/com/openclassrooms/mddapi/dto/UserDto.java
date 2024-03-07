@@ -23,7 +23,7 @@ public class UserDto {
 
     @NonNull
     @Size(max = 20)
-    private String userName;
+    private String username;
 
     @JsonIgnore
     @Size(max = 120)

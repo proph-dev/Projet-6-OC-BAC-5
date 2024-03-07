@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Data
 @Accessors(chain = true)
 @EntityListeners(AuditingEntityListener.class)
-@EqualsAndHashCode(of = {"id"})
+@EqualsAndHashCode(of = { "id" })
 @Builder
 @NoArgsConstructor
 @RequiredArgsConstructor
@@ -37,7 +37,7 @@ public class User {
   @NonNull
   @Size(max = 20)
   @Column(name = "username")
-  private String userName;
+  private String username;
 
   @NonNull
   @Size(max = 120)

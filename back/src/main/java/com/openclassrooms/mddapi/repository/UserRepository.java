@@ -11,5 +11,5 @@ import com.openclassrooms.mddapi.models.User;
 public interface UserRepository extends JpaRepository<User, Long> {
   Optional<User> findByEmail(String email);
 
-  Boolean existsByEmail(String email); 
+  Boolean existsByEmail(String email);
 }

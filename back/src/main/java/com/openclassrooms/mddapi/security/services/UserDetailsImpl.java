@@ -21,15 +21,15 @@ public class UserDetailsImpl implements UserDetails {
 
   private Long id;
 
-  private String email;
+  public String email;
 
   private String username;
 
   @JsonIgnore
-  private String password;  
-  
-  public Collection<? extends GrantedAuthority> getAuthorities() {        
-      return new HashSet<GrantedAuthority>();
+  private String password;
+
+  public Collection<? extends GrantedAuthority> getAuthorities() {
+    return new HashSet<GrantedAuthority>();
   }
 
   @Override
@@ -60,5 +60,5 @@ public class UserDetailsImpl implements UserDetails {
       return false;
     UserDetailsImpl user = (UserDetailsImpl) o;
     return Objects.equals(id, user.id);
-  } 
+  }
 }

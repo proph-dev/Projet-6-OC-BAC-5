@@ -1,0 +1,21 @@
+<div class="page-content">
+    <div class="top-infos">
+        <a href="/" class="back-arrow">
+            <img src="/assets/left-arrow.png" alt="Retour sur la page principale">
+        </a>
+    
+        <h1>Créer un nouveau post</h1>
+    </div>
+
+    <form (submit)="createPost()">
+        <select id="themeId" name="themeId" [(ngModel)]="post.themeId" required>
+            <option *ngFor="let theme of themes" [value]="theme.id">{{ theme.title }}</option>
+        </select>
+
+        <input type="text" id="title" name="title" [(ngModel)]="post.title" required placeholder="Titre de l'article">
+
+        <textarea id="content" name="content" [(ngModel)]="post.content" required placeholder="Contenu de l'artice"></textarea>
+
+        <button type="submit">Créer le post</button>
+    </form>
+</div>
